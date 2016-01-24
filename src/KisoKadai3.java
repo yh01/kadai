@@ -139,14 +139,34 @@ public class KisoKadai3 {
 		}
 	}
 
+	@SuppressWarnings("resource")
+	public static void Dlt(){
+		String dfN;
+		System.out.println("ファイルまたはフォルダを削除します");
+		System.out.println("削除したいファイル、またはフォルダを絶対パスで指定してください");
+		dfN = new java.util.Scanner(System.in) .nextLine();
+		 File dfC = new File(dfN);
+
+		    if (dfC.exists()){
+		      if (dfC.delete()){
+		        System.out.println(dfN + "を削除しました");
+		      }else{
+		        System.out.println(dfN + "の削除に失敗しました。メニューに戻ります");
+		        return;
+		      }
+		    }else{
+		      System.out.println(dfN + "が見つかりません。メニューに戻ります");
+		      return;
+		    }
+	}
+
 
 	public static void main(String[] args) throws IOException {
 		// TODO 自動生成されたメソッド・スタブ
 
 		int end = 0;
 		do{
-
-			System.out.println("\n\n--メニュー--\n\n1:フォルダを作成する\n2:ファイルを作成する\n3:ファイルに追記する\n4:ファイルを出力する\n99:終了\nのどれかをキー入力してください");
+			System.out.println("\n\n--メニュー--\n\n1:フォルダを作成する\n2:ファイルを作成する\n3:ファイルに追記する\n4:ファイルを出力する\n5:ファイル、フォルダを削除する\n99:終了\nのどれかをキー入力してください");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String str = br.readLine();
 			int nu = 0;
@@ -179,7 +199,10 @@ public class KisoKadai3 {
 			if(nu == 4){
 				System.out.println("ファイルを出力");
 				Out();
-
+			}
+			if(nu == 5){
+				System.out.println("ファイルまたはフォルダを削除");
+				Dlt();
 			}
 		}while(end < 1);
 		System.out.println("--処理終了--");
